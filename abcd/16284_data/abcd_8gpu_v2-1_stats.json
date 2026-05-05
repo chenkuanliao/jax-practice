@@ -1,0 +1,165 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-05T20:21:22.822606+00:00",
+      "created_unix_s": 1778012482.8226802,
+      "name": "abcd_8gpu_v2-1",
+      "mode": "jax_jit_named_sharding",
+      "dim": 16384,
+      "dtype": "float32",
+      "devices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "topology": "2_islands_8gpu_v100",
+      "mesh_shape": [
+        2,
+        4
+      ],
+      "mesh_axis_names": [
+        "island",
+        "lane"
+      ],
+      "warmup_rounds": 5,
+      "timed_rounds": 10,
+      "expressions": [
+        {
+          "expression": "a@b@c@d",
+          "label_slug": "abcd",
+          "compile_ms": 9716.452749446034,
+          "warmup_times_ms": [
+            265.95838367938995,
+            265.67235216498375,
+            265.69260470569134,
+            264.5186707377434,
+            264.610031619668
+          ],
+          "times_ms": [
+            264.30182345211506,
+            265.4572073370218,
+            264.9782244116068,
+            265.59258438646793,
+            265.6903862953186,
+            266.7205184698105,
+            265.1811093091965,
+            263.3253410458565,
+            265.1753295212984,
+            264.6743953227997
+          ],
+          "average_runtime_ms": 265.1096919551492,
+          "median_ms": 265.17821941524744,
+          "stdev_ms": 0.9029984191742658,
+          "min_ms": 263.3253410458565,
+          "max_ms": 266.7205184698105,
+          "effective_tflops": 99.53720994511332,
+          "gemm_count": 3,
+          "status": "ok"
+        }
+      ],
+      "jax_settings": {
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "a_sharding": "PartitionSpec('island', 'lane')",
+        "b_sharding": "PartitionSpec('island', 'lane')",
+        "c_sharding": "PartitionSpec('island', 'lane')",
+        "d_sharding": "PartitionSpec('island', 'lane')",
+        "output_sharding": "PartitionSpec('island', 'lane')"
+      }
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-05T20:21:22.822606+00:00",
+    "created_unix_s": 1778012482.8226802,
+    "name": "abcd_8gpu_v2-1",
+    "mode": "jax_jit_named_sharding",
+    "dim": 16384,
+    "dtype": "float32",
+    "devices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "topology": "2_islands_8gpu_v100",
+    "mesh_shape": [
+      2,
+      4
+    ],
+    "mesh_axis_names": [
+      "island",
+      "lane"
+    ],
+    "warmup_rounds": 5,
+    "timed_rounds": 10,
+    "expressions": [
+      {
+        "expression": "a@b@c@d",
+        "label_slug": "abcd",
+        "compile_ms": 9716.452749446034,
+        "warmup_times_ms": [
+          265.95838367938995,
+          265.67235216498375,
+          265.69260470569134,
+          264.5186707377434,
+          264.610031619668
+        ],
+        "times_ms": [
+          264.30182345211506,
+          265.4572073370218,
+          264.9782244116068,
+          265.59258438646793,
+          265.6903862953186,
+          266.7205184698105,
+          265.1811093091965,
+          263.3253410458565,
+          265.1753295212984,
+          264.6743953227997
+        ],
+        "average_runtime_ms": 265.1096919551492,
+        "median_ms": 265.17821941524744,
+        "stdev_ms": 0.9029984191742658,
+        "min_ms": 263.3253410458565,
+        "max_ms": 266.7205184698105,
+        "effective_tflops": 99.53720994511332,
+        "gemm_count": 3,
+        "status": "ok"
+      }
+    ],
+    "jax_settings": {
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "a_sharding": "PartitionSpec('island', 'lane')",
+      "b_sharding": "PartitionSpec('island', 'lane')",
+      "c_sharding": "PartitionSpec('island', 'lane')",
+      "d_sharding": "PartitionSpec('island', 'lane')",
+      "output_sharding": "PartitionSpec('island', 'lane')"
+    }
+  },
+  "last_updated_at_utc": "2026-05-05T20:21:22.824099+00:00"
+}

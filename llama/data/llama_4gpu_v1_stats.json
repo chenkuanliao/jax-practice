@@ -1,0 +1,193 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-05T21:35:04.341694+00:00",
+      "created_unix_s": 1778016904.3417616,
+      "name": "llama_4gpu_v1",
+      "mode": "jax_jit_named_sharding",
+      "dtype": "float32",
+      "devices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "topology": "1_island_4gpu_v100",
+      "mesh_shape": [
+        2,
+        2
+      ],
+      "mesh_axis_names": [
+        "x",
+        "y"
+      ],
+      "warmup_rounds": 2,
+      "timed_rounds": 10,
+      "seq": 8192,
+      "hidden": 4096,
+      "heads": 32,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "ffn": 11008,
+      "strategy": "user_baseline",
+      "estimated_total_flops": 4002909519872,
+      "estimated_attention_flops": 1099511627776,
+      "estimated_ffn_flops": 2216203124736,
+      "estimated_projection_flops": 687194767360,
+      "jax_settings": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "activation_sharding": "PartitionSpec('x', None)",
+        "q_sharding": "PartitionSpec('x', 'y', None)",
+        "kv_sharding": "PartitionSpec('x', 'y', None)",
+        "rope_q_sharding": "PartitionSpec('x', 'y', None)",
+        "rope_k_sharding": "PartitionSpec('x', 'y', None)",
+        "attention_context_sharding": "PartitionSpec('x', 'y', None)",
+        "attention_output_sharding": "PartitionSpec('x', None)",
+        "ffn_intermediate_sharding": "PartitionSpec('x', 'y')",
+        "final_output_sharding": "PartitionSpec('x', None)",
+        "weight_shardings": {
+          "wq": "PartitionSpec(None, 'y', None)",
+          "wk": "PartitionSpec(None, 'y', None)",
+          "wv": "PartitionSpec(None, 'y', None)",
+          "wo": "PartitionSpec('y', None, None)",
+          "w_gu": "PartitionSpec(None, 'y')",
+          "w_down": "PartitionSpec('y', None)",
+          "gamma_a": "PartitionSpec(None,)",
+          "gamma_f": "PartitionSpec(None,)"
+        },
+        "fallback": null
+      },
+      "expressions": [
+        {
+          "expression": "llama_decoder_block",
+          "label_slug": "llama_block",
+          "compile_ms": 5454.208683222532,
+          "warmup_times_ms": [
+            109.04457606375217,
+            103.16892713308334
+          ],
+          "times_ms": [
+            101.87829472124577,
+            99.62436184287071,
+            99.90948624908924,
+            99.91299547255039,
+            100.0278852880001,
+            100.3094520419836,
+            100.2070251852274,
+            100.01578368246555,
+            100.04623234272003,
+            100.27339681982994
+          ],
+          "average_runtime_ms": 100.22049136459827,
+          "median_ms": 100.03705881536007,
+          "stdev_ms": 0.6160107458802574,
+          "min_ms": 99.62436184287071,
+          "max_ms": 101.87829472124577,
+          "effective_tflops": 39.94102867954987,
+          "estimated_flops": 4002909519872,
+          "status": "ok"
+        }
+      ]
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-05T21:35:04.341694+00:00",
+    "created_unix_s": 1778016904.3417616,
+    "name": "llama_4gpu_v1",
+    "mode": "jax_jit_named_sharding",
+    "dtype": "float32",
+    "devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "topology": "1_island_4gpu_v100",
+    "mesh_shape": [
+      2,
+      2
+    ],
+    "mesh_axis_names": [
+      "x",
+      "y"
+    ],
+    "warmup_rounds": 2,
+    "timed_rounds": 10,
+    "seq": 8192,
+    "hidden": 4096,
+    "heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn": 11008,
+    "strategy": "user_baseline",
+    "estimated_total_flops": 4002909519872,
+    "estimated_attention_flops": 1099511627776,
+    "estimated_ffn_flops": 2216203124736,
+    "estimated_projection_flops": 687194767360,
+    "jax_settings": {
+      "order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "activation_sharding": "PartitionSpec('x', None)",
+      "q_sharding": "PartitionSpec('x', 'y', None)",
+      "kv_sharding": "PartitionSpec('x', 'y', None)",
+      "rope_q_sharding": "PartitionSpec('x', 'y', None)",
+      "rope_k_sharding": "PartitionSpec('x', 'y', None)",
+      "attention_context_sharding": "PartitionSpec('x', 'y', None)",
+      "attention_output_sharding": "PartitionSpec('x', None)",
+      "ffn_intermediate_sharding": "PartitionSpec('x', 'y')",
+      "final_output_sharding": "PartitionSpec('x', None)",
+      "weight_shardings": {
+        "wq": "PartitionSpec(None, 'y', None)",
+        "wk": "PartitionSpec(None, 'y', None)",
+        "wv": "PartitionSpec(None, 'y', None)",
+        "wo": "PartitionSpec('y', None, None)",
+        "w_gu": "PartitionSpec(None, 'y')",
+        "w_down": "PartitionSpec('y', None)",
+        "gamma_a": "PartitionSpec(None,)",
+        "gamma_f": "PartitionSpec(None,)"
+      },
+      "fallback": null
+    },
+    "expressions": [
+      {
+        "expression": "llama_decoder_block",
+        "label_slug": "llama_block",
+        "compile_ms": 5454.208683222532,
+        "warmup_times_ms": [
+          109.04457606375217,
+          103.16892713308334
+        ],
+        "times_ms": [
+          101.87829472124577,
+          99.62436184287071,
+          99.90948624908924,
+          99.91299547255039,
+          100.0278852880001,
+          100.3094520419836,
+          100.2070251852274,
+          100.01578368246555,
+          100.04623234272003,
+          100.27339681982994
+        ],
+        "average_runtime_ms": 100.22049136459827,
+        "median_ms": 100.03705881536007,
+        "stdev_ms": 0.6160107458802574,
+        "min_ms": 99.62436184287071,
+        "max_ms": 101.87829472124577,
+        "effective_tflops": 39.94102867954987,
+        "estimated_flops": 4002909519872,
+        "status": "ok"
+      }
+    ]
+  },
+  "last_updated_at_utc": "2026-05-05T21:35:04.342653+00:00"
+}

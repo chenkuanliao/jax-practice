@@ -1,0 +1,149 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-05T20:18:15.782744+00:00",
+      "created_unix_s": 1778012295.7828128,
+      "name": "abcd_4gpu_v2-1",
+      "mode": "jax_jit_named_sharding",
+      "dim": 16384,
+      "dtype": "float32",
+      "devices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "topology": "1_island_4gpu_v100",
+      "mesh_shape": [
+        2,
+        2
+      ],
+      "mesh_axis_names": [
+        "island",
+        "lane"
+      ],
+      "warmup_rounds": 5,
+      "timed_rounds": 10,
+      "expressions": [
+        {
+          "expression": "a@b@c@d",
+          "label_slug": "abcd",
+          "compile_ms": 15692.880850285292,
+          "warmup_times_ms": [
+            533.6593147367239,
+            531.203169375658,
+            530.5065661668777,
+            528.3329747617245,
+            535.2803710848093
+          ],
+          "times_ms": [
+            533.5390083491802,
+            533.6262732744217,
+            531.9363512098789,
+            529.461570084095,
+            530.5134989321232,
+            534.604275599122,
+            534.3589708209038,
+            533.4010608494282,
+            533.1113953143358,
+            529.6515394002199
+          ],
+          "average_runtime_ms": 532.4203943833709,
+          "median_ms": 533.256228081882,
+          "stdev_ms": 1.913803458061591,
+          "min_ms": 529.461570084095,
+          "max_ms": 534.604275599122,
+          "effective_tflops": 49.56286300262015,
+          "gemm_count": 3,
+          "status": "ok"
+        }
+      ],
+      "jax_settings": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "a_sharding": "PartitionSpec('island', 'lane')",
+        "b_sharding": "PartitionSpec('island', 'lane')",
+        "c_sharding": "PartitionSpec('island', 'lane')",
+        "d_sharding": "PartitionSpec('island', 'lane')",
+        "output_sharding": "PartitionSpec('island', 'lane')"
+      }
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-05T20:18:15.782744+00:00",
+    "created_unix_s": 1778012295.7828128,
+    "name": "abcd_4gpu_v2-1",
+    "mode": "jax_jit_named_sharding",
+    "dim": 16384,
+    "dtype": "float32",
+    "devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "topology": "1_island_4gpu_v100",
+    "mesh_shape": [
+      2,
+      2
+    ],
+    "mesh_axis_names": [
+      "island",
+      "lane"
+    ],
+    "warmup_rounds": 5,
+    "timed_rounds": 10,
+    "expressions": [
+      {
+        "expression": "a@b@c@d",
+        "label_slug": "abcd",
+        "compile_ms": 15692.880850285292,
+        "warmup_times_ms": [
+          533.6593147367239,
+          531.203169375658,
+          530.5065661668777,
+          528.3329747617245,
+          535.2803710848093
+        ],
+        "times_ms": [
+          533.5390083491802,
+          533.6262732744217,
+          531.9363512098789,
+          529.461570084095,
+          530.5134989321232,
+          534.604275599122,
+          534.3589708209038,
+          533.4010608494282,
+          533.1113953143358,
+          529.6515394002199
+        ],
+        "average_runtime_ms": 532.4203943833709,
+        "median_ms": 533.256228081882,
+        "stdev_ms": 1.913803458061591,
+        "min_ms": 529.461570084095,
+        "max_ms": 534.604275599122,
+        "effective_tflops": 49.56286300262015,
+        "gemm_count": 3,
+        "status": "ok"
+      }
+    ],
+    "jax_settings": {
+      "order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "a_sharding": "PartitionSpec('island', 'lane')",
+      "b_sharding": "PartitionSpec('island', 'lane')",
+      "c_sharding": "PartitionSpec('island', 'lane')",
+      "d_sharding": "PartitionSpec('island', 'lane')",
+      "output_sharding": "PartitionSpec('island', 'lane')"
+    }
+  },
+  "last_updated_at_utc": "2026-05-05T20:18:15.784128+00:00"
+}

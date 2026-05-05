@@ -1,0 +1,209 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-05T21:37:59.694953+00:00",
+      "created_unix_s": 1778017079.6950471,
+      "name": "llama_8gpu_v2",
+      "mode": "jax_jit_named_sharding",
+      "dtype": "float32",
+      "devices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "topology": "2_islands_8gpu_v100",
+      "mesh_shape": [
+        2,
+        4
+      ],
+      "mesh_axis_names": [
+        "x",
+        "y"
+      ],
+      "warmup_rounds": 2,
+      "timed_rounds": 10,
+      "seq": 8192,
+      "hidden": 4096,
+      "heads": 32,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "ffn": 11008,
+      "strategy": "minimal_manual_constraints",
+      "estimated_total_flops": 4002909519872,
+      "estimated_attention_flops": 1099511627776,
+      "estimated_ffn_flops": 2216203124736,
+      "estimated_projection_flops": 687194767360,
+      "jax_settings": {
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "activation_sharding": "PartitionSpec('x', None)",
+        "q_sharding": "PartitionSpec('x', 'y', None)",
+        "kv_sharding": "PartitionSpec('x', 'y', None)",
+        "rope_q_sharding": "PartitionSpec('x', 'y', None)",
+        "rope_k_sharding": "PartitionSpec('x', 'y', None)",
+        "attention_context_sharding": "PartitionSpec('x', 'y', None)",
+        "attention_output_sharding": "PartitionSpec('x', None)",
+        "ffn_intermediate_sharding": "PartitionSpec('x', 'y')",
+        "final_output_sharding": "PartitionSpec('x', None)",
+        "weight_shardings": {
+          "wq": "PartitionSpec(None, 'y', None)",
+          "wk": "PartitionSpec(None, 'y', None)",
+          "wv": "PartitionSpec(None, 'y', None)",
+          "wo": "PartitionSpec('y', None, None)",
+          "w_gu": "PartitionSpec(None, 'y')",
+          "w_down": "PartitionSpec('y', None)",
+          "gamma_a": "PartitionSpec(None,)",
+          "gamma_f": "PartitionSpec(None,)"
+        },
+        "fallback": null
+      },
+      "expressions": [
+        {
+          "expression": "llama_decoder_block",
+          "label_slug": "llama_block",
+          "compile_ms": 5058.741753920913,
+          "warmup_times_ms": [
+            63.075605779886246,
+            63.1001777946949
+          ],
+          "times_ms": [
+            60.93788146972656,
+            57.332843542099,
+            57.838113978505135,
+            63.54570761322975,
+            57.099441066384315,
+            56.646471843123436,
+            54.59107644855976,
+            56.58191442489624,
+            55.755576118826866,
+            56.316278874874115
+          ],
+          "average_runtime_ms": 57.66453053802252,
+          "median_ms": 56.872956454753876,
+          "stdev_ms": 2.643210472418099,
+          "min_ms": 54.59107644855976,
+          "max_ms": 63.54570761322975,
+          "effective_tflops": 69.41718735111498,
+          "estimated_flops": 4002909519872,
+          "status": "ok"
+        }
+      ]
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-05T21:37:59.694953+00:00",
+    "created_unix_s": 1778017079.6950471,
+    "name": "llama_8gpu_v2",
+    "mode": "jax_jit_named_sharding",
+    "dtype": "float32",
+    "devices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "topology": "2_islands_8gpu_v100",
+    "mesh_shape": [
+      2,
+      4
+    ],
+    "mesh_axis_names": [
+      "x",
+      "y"
+    ],
+    "warmup_rounds": 2,
+    "timed_rounds": 10,
+    "seq": 8192,
+    "hidden": 4096,
+    "heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn": 11008,
+    "strategy": "minimal_manual_constraints",
+    "estimated_total_flops": 4002909519872,
+    "estimated_attention_flops": 1099511627776,
+    "estimated_ffn_flops": 2216203124736,
+    "estimated_projection_flops": 687194767360,
+    "jax_settings": {
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "activation_sharding": "PartitionSpec('x', None)",
+      "q_sharding": "PartitionSpec('x', 'y', None)",
+      "kv_sharding": "PartitionSpec('x', 'y', None)",
+      "rope_q_sharding": "PartitionSpec('x', 'y', None)",
+      "rope_k_sharding": "PartitionSpec('x', 'y', None)",
+      "attention_context_sharding": "PartitionSpec('x', 'y', None)",
+      "attention_output_sharding": "PartitionSpec('x', None)",
+      "ffn_intermediate_sharding": "PartitionSpec('x', 'y')",
+      "final_output_sharding": "PartitionSpec('x', None)",
+      "weight_shardings": {
+        "wq": "PartitionSpec(None, 'y', None)",
+        "wk": "PartitionSpec(None, 'y', None)",
+        "wv": "PartitionSpec(None, 'y', None)",
+        "wo": "PartitionSpec('y', None, None)",
+        "w_gu": "PartitionSpec(None, 'y')",
+        "w_down": "PartitionSpec('y', None)",
+        "gamma_a": "PartitionSpec(None,)",
+        "gamma_f": "PartitionSpec(None,)"
+      },
+      "fallback": null
+    },
+    "expressions": [
+      {
+        "expression": "llama_decoder_block",
+        "label_slug": "llama_block",
+        "compile_ms": 5058.741753920913,
+        "warmup_times_ms": [
+          63.075605779886246,
+          63.1001777946949
+        ],
+        "times_ms": [
+          60.93788146972656,
+          57.332843542099,
+          57.838113978505135,
+          63.54570761322975,
+          57.099441066384315,
+          56.646471843123436,
+          54.59107644855976,
+          56.58191442489624,
+          55.755576118826866,
+          56.316278874874115
+        ],
+        "average_runtime_ms": 57.66453053802252,
+        "median_ms": 56.872956454753876,
+        "stdev_ms": 2.643210472418099,
+        "min_ms": 54.59107644855976,
+        "max_ms": 63.54570761322975,
+        "effective_tflops": 69.41718735111498,
+        "estimated_flops": 4002909519872,
+        "status": "ok"
+      }
+    ]
+  },
+  "last_updated_at_utc": "2026-05-05T21:37:59.696471+00:00"
+}
