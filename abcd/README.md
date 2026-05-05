@@ -18,6 +18,28 @@ benchmarking API and produces uniform JSON plus terminal output.
   (requires Matplotlib).
 - `FINDINGS_REPORT.md`: summary of the recorded benchmark results.
 
+## Plots (saved runs)
+
+Below are the figures checked in next to the JSON they were generated from.
+Regenerate with the `plot_*.py` / `compare_gpu_speedup.py` scripts in each
+folder (see the root `JAX-practice/README.md` plotting section).
+
+### `8129_data/` (8192 × 8192 — see `FINDINGS_REPORT.md`)
+
+![Mean runtime, 4 GPU](8129_data/mean_runtime_4gpu.png)
+
+![Mean runtime, 8 GPU](8129_data/mean_runtime_8gpu.png)
+
+![4-to-8 GPU speedup](8129_data/mean_gpu_speedup.png)
+
+### `16284_data/` (16384 × 16384 — `dim` in JSON)
+
+![Mean runtime, 4 GPU](16284_data/mean_runtime_4gpu.png)
+
+![Mean runtime, 8 GPU](16284_data/mean_runtime_8gpu.png)
+
+![4-to-8 GPU speedup](16284_data/mean_gpu_speedup.png)
+
 ## Run
 
 From the project root (`JAX-practice/`):

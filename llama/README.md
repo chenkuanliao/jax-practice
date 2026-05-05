@@ -72,3 +72,14 @@ python3 data/plot_mean_runtime_4gpu.py
 python3 data/plot_mean_runtime_8gpu.py
 python3 data/compare_gpu_speedup.py
 ```
+
+### Recorded run figures
+
+These match the JSON in `data/` and the summary in
+`LLAMA_BLOCK_FINDINGS_REPORT.md`.
+
+![Mean runtime, 4 GPU](data/mean_runtime_4gpu.png)
+
+![Mean runtime, 8 GPU](data/mean_runtime_8gpu.png)
+
+![4-to-8 GPU speedup](data/mean_gpu_speedup.png)

@@ -42,6 +42,18 @@ cd abcd
 See `abcd/README.md` for the file layout and `abcd/FINDINGS_REPORT.md` for the
 recorded results.
 
+**ABCD plots** (mean runtime on 4 / 8 GPUs and 4→8 speedup; data in
+`abcd/8129_data/`, matrix size `8192 × 8192` per `FINDINGS_REPORT.md`):
+
+![ABCD mean runtime, 4 GPU](abcd/8129_data/mean_runtime_4gpu.png)
+
+![ABCD mean runtime, 8 GPU](abcd/8129_data/mean_runtime_8gpu.png)
+
+![ABCD 4-to-8 GPU speedup](abcd/8129_data/mean_gpu_speedup.png)
+
+Additional figures for the run saved under `abcd/16284_data/` are shown in
+`abcd/README.md`.
+
 ## Llama Block Benchmark
 
 The `llama/` suite benchmarks one configurable Llama block with RMSNorm,
@@ -78,6 +90,14 @@ python3 llama_4gpu_v1.py \
 
 See `llama/README.md` for the file layout and
 `llama/LLAMA_BLOCK_FINDINGS_REPORT.md` for the recorded results.
+
+**Llama block plots** (same metrics; data in `llama/data/`):
+
+![Llama mean runtime, 4 GPU](llama/data/mean_runtime_4gpu.png)
+
+![Llama mean runtime, 8 GPU](llama/data/mean_runtime_8gpu.png)
+
+![Llama 4-to-8 GPU speedup](llama/data/mean_gpu_speedup.png)
 
 ## Plotting
 
