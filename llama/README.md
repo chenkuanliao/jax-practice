@@ -16,8 +16,8 @@ strategy and writes a compatible `data/*_stats.json` payload.
 - `llama_8gpu_v1.py`, `llama_8gpu_v2.py`: 8-GPU variants on a `(2, 4)` mesh
   named `("x", "y")`.
 - `run_all_benchmarks.sh`: runs all 4-GPU scripts, then all 8-GPU scripts.
-- `data/*.py`: plotting helpers for mean runtime and 4-to-8 GPU speedup (use the
-  `jax-v100` conda environment; it includes Matplotlib).
+- `data/*.py`: plotting helpers for mean runtime and 4-to-8 GPU speedup
+  (requires Matplotlib in your Python environment).
 
 ## Variants
 
@@ -64,10 +64,11 @@ python3 llama_4gpu_v1.py \
 
 ## Plot
 
-After benchmark JSON exists in `data/`, run (with the `jax-v100` conda env):
+After benchmark JSON exists in `data/`, run (from this directory, with
+Matplotlib available):
 
 ```bash
-conda run -n jax-v100 python3 data/plot_mean_runtime_4gpu.py
-conda run -n jax-v100 python3 data/plot_mean_runtime_8gpu.py
-conda run -n jax-v100 python3 data/compare_gpu_speedup.py
+python3 data/plot_mean_runtime_4gpu.py
+python3 data/plot_mean_runtime_8gpu.py
+python3 data/compare_gpu_speedup.py
 ```

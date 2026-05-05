@@ -13,8 +13,9 @@ benchmarking API and produces uniform JSON plus terminal output.
 - `abcd_8gpu_v2-*.py`: 8-GPU explicit stepwise matmul variants.
 - `run_all_benchmarks.sh`: runs all 4-GPU scripts, then all 8-GPU scripts.
 - `8129_data/`, `16284_data/`: saved benchmark JSON and generated plots for
-  previous dimension runs. Regenerate figures with `conda run -n jax-v100 python3 …`
-  on `plot_mean_runtime_*.py` and `compare_gpu_speedup.py` inside those folders.
+  previous dimension runs. Regenerate figures by running `python3` on
+  `plot_mean_runtime_*.py` and `compare_gpu_speedup.py` inside those folders
+  (requires Matplotlib).
 - `FINDINGS_REPORT.md`: summary of the recorded benchmark results.
 
 ## Run

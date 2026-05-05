@@ -81,23 +81,23 @@ See `llama/README.md` for the file layout and
 
 ## Plotting
 
-Use the **`jax-v100`** conda environment (Matplotlib is available there).
+Plot scripts need a Python environment with Matplotlib installed.
 
 After JSON result files exist, generate plots from the saved ABCD directories
 `abcd/8129_data/` or `abcd/16284_data/`, or from `llama/data/`:
 
 ```bash
 cd abcd/8129_data
-conda run -n jax-v100 python3 plot_mean_runtime_4gpu.py
-conda run -n jax-v100 python3 plot_mean_runtime_8gpu.py
-conda run -n jax-v100 python3 compare_gpu_speedup.py
+python3 plot_mean_runtime_4gpu.py
+python3 plot_mean_runtime_8gpu.py
+python3 compare_gpu_speedup.py
 ```
 
 ```bash
 cd llama/data
-conda run -n jax-v100 python3 plot_mean_runtime_4gpu.py
-conda run -n jax-v100 python3 plot_mean_runtime_8gpu.py
-conda run -n jax-v100 python3 compare_gpu_speedup.py
+python3 plot_mean_runtime_4gpu.py
+python3 plot_mean_runtime_8gpu.py
+python3 compare_gpu_speedup.py
 ```
 
 The plots summarize **mean** runtime on 4 GPUs, mean runtime on 8 GPUs, and
