@@ -1,0 +1,149 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-07T02:48:49.548053+00:00",
+      "created_unix_s": 1778122129.5481026,
+      "name": "abcdefg_4gpu_v1-3",
+      "mode": "jax_jit_named_sharding",
+      "dim": 8192,
+      "dtype": "float32",
+      "devices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "topology": "1_island_4gpu_v100",
+      "mesh_shape": [
+        2,
+        2
+      ],
+      "mesh_axis_names": [
+        "island",
+        "lane"
+      ],
+      "warmup_rounds": 2,
+      "timed_rounds": 10,
+      "expressions": [
+        {
+          "expression": "a@b@c@d@e@f@g",
+          "label_slug": "abcdefg",
+          "compile_ms": 5966.39768203022,
+          "warmup_times_ms": [
+            142.8333839867264,
+            137.6690739998594
+          ],
+          "times_ms": [
+            136.92426995839924,
+            136.34994701715186,
+            135.12520998483524,
+            136.26883999677375,
+            136.3605100195855,
+            136.2734319991432,
+            137.24584301235154,
+            137.5008660252206,
+            150.2452560234815,
+            137.46067299507558
+          ],
+          "average_runtime_ms": 137.9754847032018,
+          "median_ms": 136.64238998899236,
+          "stdev_ms": 4.369836167816431,
+          "min_ms": 135.12520998483524,
+          "max_ms": 150.2452560234815,
+          "effective_tflops": 47.81334728301129,
+          "gemm_count": 6,
+          "status": "ok"
+        }
+      ],
+      "jax_settings": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "a_sharding": "PartitionSpec('island', None)",
+        "b_sharding": "PartitionSpec(None, 'lane')",
+        "c_sharding": "PartitionSpec(None, 'lane')",
+        "d_sharding": "PartitionSpec(None, 'lane')",
+        "e_sharding": "PartitionSpec(None, 'lane')",
+        "f_sharding": "PartitionSpec(None, 'lane')",
+        "g_sharding": "PartitionSpec(None, 'lane')",
+        "output_sharding": "PartitionSpec('island', 'lane')"
+      }
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-07T02:48:49.548053+00:00",
+    "created_unix_s": 1778122129.5481026,
+    "name": "abcdefg_4gpu_v1-3",
+    "mode": "jax_jit_named_sharding",
+    "dim": 8192,
+    "dtype": "float32",
+    "devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "topology": "1_island_4gpu_v100",
+    "mesh_shape": [
+      2,
+      2
+    ],
+    "mesh_axis_names": [
+      "island",
+      "lane"
+    ],
+    "warmup_rounds": 2,
+    "timed_rounds": 10,
+    "expressions": [
+      {
+        "expression": "a@b@c@d@e@f@g",
+        "label_slug": "abcdefg",
+        "compile_ms": 5966.39768203022,
+        "warmup_times_ms": [
+          142.8333839867264,
+          137.6690739998594
+        ],
+        "times_ms": [
+          136.92426995839924,
+          136.34994701715186,
+          135.12520998483524,
+          136.26883999677375,
+          136.3605100195855,
+          136.2734319991432,
+          137.24584301235154,
+          137.5008660252206,
+          150.2452560234815,
+          137.46067299507558
+        ],
+        "average_runtime_ms": 137.9754847032018,
+        "median_ms": 136.64238998899236,
+        "stdev_ms": 4.369836167816431,
+        "min_ms": 135.12520998483524,
+        "max_ms": 150.2452560234815,
+        "effective_tflops": 47.81334728301129,
+        "gemm_count": 6,
+        "status": "ok"
+      }
+    ],
+    "jax_settings": {
+      "order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "a_sharding": "PartitionSpec('island', None)",
+      "b_sharding": "PartitionSpec(None, 'lane')",
+      "c_sharding": "PartitionSpec(None, 'lane')",
+      "d_sharding": "PartitionSpec(None, 'lane')",
+      "e_sharding": "PartitionSpec(None, 'lane')",
+      "f_sharding": "PartitionSpec(None, 'lane')",
+      "g_sharding": "PartitionSpec(None, 'lane')",
+      "output_sharding": "PartitionSpec('island', 'lane')"
+    }
+  },
+  "last_updated_at_utc": "2026-05-07T02:48:49.549025+00:00"
+}
