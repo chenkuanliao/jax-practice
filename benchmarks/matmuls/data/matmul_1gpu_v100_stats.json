@@ -1,0 +1,293 @@
+{
+  "runs": [
+    {
+      "created_at_utc": "2026-05-11T03:46:45.620716+00:00",
+      "created_unix_s": 1778471205.6207473,
+      "name": "matmul_1gpu",
+      "mode": "jax_jit_named_sharding",
+      "dim": 8192,
+      "dtype": "float16",
+      "devices": [
+        0
+      ],
+      "topology": "1_gpu",
+      "mesh_shape": [
+        1,
+        1
+      ],
+      "mesh_axis_names": [
+        "island",
+        "lane"
+      ],
+      "warmup_rounds": 5,
+      "timed_rounds": 1,
+      "expressions": [
+        {
+          "expression": "a@b",
+          "label_slug": "ab",
+          "compile_ms": 3563.9513097703457,
+          "warmup_times_ms": [
+            11.737002059817314,
+            11.724188923835754,
+            11.731376871466637,
+            11.769196018576622,
+            11.916832998394966
+          ],
+          "times_ms": [
+            11.982880532741547
+          ],
+          "average_runtime_ms": 11.982880532741547,
+          "median_ms": 11.982880532741547,
+          "stdev_ms": 0.0,
+          "min_ms": 11.982880532741547,
+          "max_ms": 11.982880532741547,
+          "effective_tflops": 91.75687137760725,
+          "gemm_count": 1,
+          "status": "ok",
+          "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+        },
+        {
+          "expression": "a@b@c",
+          "label_slug": "abc",
+          "compile_ms": 7028.611596673727,
+          "warmup_times_ms": [
+            24.02380108833313,
+            24.170108139514923,
+            24.143896996974945,
+            24.33060295879841,
+            24.330174550414085
+          ],
+          "times_ms": [
+            23.834511637687683
+          ],
+          "average_runtime_ms": 23.834511637687683,
+          "median_ms": 23.834511637687683,
+          "stdev_ms": 0.0,
+          "min_ms": 23.834511637687683,
+          "max_ms": 23.834511637687683,
+          "effective_tflops": 92.2621486430984,
+          "gemm_count": 2,
+          "status": "ok",
+          "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+        },
+        {
+          "expression": "a@b@c@d",
+          "label_slug": "abcd",
+          "compile_ms": 73.65117408335209,
+          "warmup_times_ms": [
+            36.028336733579636,
+            36.511821672320366,
+            36.773087456822395,
+            36.83844581246376,
+            36.7225706577301
+          ],
+          "times_ms": [
+            36.0492505133152
+          ],
+          "average_runtime_ms": 36.0492505133152,
+          "median_ms": 36.0492505133152,
+          "stdev_ms": 0.0,
+          "min_ms": 36.0492505133152,
+          "max_ms": 36.0492505133152,
+          "effective_tflops": 91.50078951321467,
+          "gemm_count": 3,
+          "status": "ok",
+          "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+        },
+        {
+          "expression": "a@b@c@d@e@f@g@h",
+          "label_slug": "abcdefgh",
+          "compile_ms": 126.3341698795557,
+          "warmup_times_ms": [
+            83.55193957686424,
+            83.86380225419998,
+            83.54386314749718,
+            83.40727724134922,
+            83.49032513797283
+          ],
+          "times_ms": [
+            83.2881573587656
+          ],
+          "average_runtime_ms": 83.2881573587656,
+          "median_ms": 83.2881573587656,
+          "stdev_ms": 0.0,
+          "min_ms": 83.2881573587656,
+          "max_ms": 83.2881573587656,
+          "effective_tflops": 92.40907277224063,
+          "gemm_count": 7,
+          "status": "ok",
+          "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+        }
+      ],
+      "tags": [
+        "matmul_chains",
+        "v2-3",
+        "flat",
+        "1gpu",
+        "profile",
+        "v100"
+      ],
+      "jax_settings": {
+        "order": [
+          0
+        ],
+        "a_sharding": "PartitionSpec('island', None)",
+        "b_sharding": "PartitionSpec(None, 'lane')",
+        "c_sharding": "PartitionSpec('island', None)",
+        "c_abc_sharding": "PartitionSpec(None, 'lane')",
+        "d_sharding": "PartitionSpec(None, 'lane')",
+        "e_sharding": "PartitionSpec('island', None)",
+        "f_sharding": "PartitionSpec(None, 'lane')",
+        "g_sharding": "PartitionSpec('island', None)",
+        "h_sharding": "PartitionSpec(None, 'lane')",
+        "output_sharding": "PartitionSpec('island', 'lane')"
+      },
+      "accelerator": "V100"
+    }
+  ],
+  "latest": {
+    "created_at_utc": "2026-05-11T03:46:45.620716+00:00",
+    "created_unix_s": 1778471205.6207473,
+    "name": "matmul_1gpu",
+    "mode": "jax_jit_named_sharding",
+    "dim": 8192,
+    "dtype": "float16",
+    "devices": [
+      0
+    ],
+    "topology": "1_gpu",
+    "mesh_shape": [
+      1,
+      1
+    ],
+    "mesh_axis_names": [
+      "island",
+      "lane"
+    ],
+    "warmup_rounds": 5,
+    "timed_rounds": 1,
+    "expressions": [
+      {
+        "expression": "a@b",
+        "label_slug": "ab",
+        "compile_ms": 3563.9513097703457,
+        "warmup_times_ms": [
+          11.737002059817314,
+          11.724188923835754,
+          11.731376871466637,
+          11.769196018576622,
+          11.916832998394966
+        ],
+        "times_ms": [
+          11.982880532741547
+        ],
+        "average_runtime_ms": 11.982880532741547,
+        "median_ms": 11.982880532741547,
+        "stdev_ms": 0.0,
+        "min_ms": 11.982880532741547,
+        "max_ms": 11.982880532741547,
+        "effective_tflops": 91.75687137760725,
+        "gemm_count": 1,
+        "status": "ok",
+        "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+      },
+      {
+        "expression": "a@b@c",
+        "label_slug": "abc",
+        "compile_ms": 7028.611596673727,
+        "warmup_times_ms": [
+          24.02380108833313,
+          24.170108139514923,
+          24.143896996974945,
+          24.33060295879841,
+          24.330174550414085
+        ],
+        "times_ms": [
+          23.834511637687683
+        ],
+        "average_runtime_ms": 23.834511637687683,
+        "median_ms": 23.834511637687683,
+        "stdev_ms": 0.0,
+        "min_ms": 23.834511637687683,
+        "max_ms": 23.834511637687683,
+        "effective_tflops": 92.2621486430984,
+        "gemm_count": 2,
+        "status": "ok",
+        "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+      },
+      {
+        "expression": "a@b@c@d",
+        "label_slug": "abcd",
+        "compile_ms": 73.65117408335209,
+        "warmup_times_ms": [
+          36.028336733579636,
+          36.511821672320366,
+          36.773087456822395,
+          36.83844581246376,
+          36.7225706577301
+        ],
+        "times_ms": [
+          36.0492505133152
+        ],
+        "average_runtime_ms": 36.0492505133152,
+        "median_ms": 36.0492505133152,
+        "stdev_ms": 0.0,
+        "min_ms": 36.0492505133152,
+        "max_ms": 36.0492505133152,
+        "effective_tflops": 91.50078951321467,
+        "gemm_count": 3,
+        "status": "ok",
+        "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+      },
+      {
+        "expression": "a@b@c@d@e@f@g@h",
+        "label_slug": "abcdefgh",
+        "compile_ms": 126.3341698795557,
+        "warmup_times_ms": [
+          83.55193957686424,
+          83.86380225419998,
+          83.54386314749718,
+          83.40727724134922,
+          83.49032513797283
+        ],
+        "times_ms": [
+          83.2881573587656
+        ],
+        "average_runtime_ms": 83.2881573587656,
+        "median_ms": 83.2881573587656,
+        "stdev_ms": 0.0,
+        "min_ms": 83.2881573587656,
+        "max_ms": 83.2881573587656,
+        "effective_tflops": 92.40907277224063,
+        "gemm_count": 7,
+        "status": "ok",
+        "profile_trace_dir": "/home/brian/JAX/jax-practice/benchmarks/matmuls/data/matmul_1gpu_v100_trace"
+      }
+    ],
+    "tags": [
+      "matmul_chains",
+      "v2-3",
+      "flat",
+      "1gpu",
+      "profile",
+      "v100"
+    ],
+    "jax_settings": {
+      "order": [
+        0
+      ],
+      "a_sharding": "PartitionSpec('island', None)",
+      "b_sharding": "PartitionSpec(None, 'lane')",
+      "c_sharding": "PartitionSpec('island', None)",
+      "c_abc_sharding": "PartitionSpec(None, 'lane')",
+      "d_sharding": "PartitionSpec(None, 'lane')",
+      "e_sharding": "PartitionSpec('island', None)",
+      "f_sharding": "PartitionSpec(None, 'lane')",
+      "g_sharding": "PartitionSpec('island', None)",
+      "h_sharding": "PartitionSpec(None, 'lane')",
+      "output_sharding": "PartitionSpec('island', 'lane')"
+    },
+    "accelerator": "V100"
+  },
+  "last_updated_at_utc": "2026-05-11T03:46:45.620763+00:00"
+}
