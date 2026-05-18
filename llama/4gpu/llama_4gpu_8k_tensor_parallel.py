@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import sys
+
+from llama_block_4gpu import main
+
+
+if __name__ == "__main__":
+    sys.argv[1:1] = [
+        "--strategy",
+        "tensor_parallel",
+        "--batch-sequences",
+        "1",
+        "--seq-len",
+        "8192",
+        "--json",
+        "llama_4gpu_8k_tensor_parallel.json",
+    ]
+    main()
