@@ -1,0 +1,65 @@
+{
+  "created_at_utc": "2026-05-18T17:43:38.204045+00:00",
+  "name": "llama_block_1gpu",
+  "framework": "jax",
+  "jax_version": "0.6.2",
+  "dtype": "float16",
+  "devices": [
+    {
+      "id": 0,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    }
+  ],
+  "topology": "single_gpu",
+  "attention_implementation": "auto",
+  "shape": {
+    "batch_sequences": 8,
+    "seq_len": 1024,
+    "total_tokens": 8192,
+    "packed_equal_length_sequences": true,
+    "hidden": 4096,
+    "q_heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_inter": 14336,
+    "ffn_gate_up": 28672
+  },
+  "rounds": {
+    "warmup": 3,
+    "timed": 10
+  },
+  "estimated_flop_counts": {
+    "projection": 687194767360,
+    "attention": 137438953472,
+    "ffn": 2886218022912,
+    "total": 3710851743744
+  },
+  "timing": {
+    "compile_ms": 12743.499580770731,
+    "warmup_times_ms": [
+      49.02694746851921,
+      48.73971454799175,
+      48.89484867453575
+    ],
+    "times_ms": [
+      49.02164451777935,
+      48.90335537493229,
+      48.93091507256031,
+      48.771316185593605,
+      48.98535832762718,
+      49.00156147778034,
+      49.33405481278896,
+      48.90415258705616,
+      48.91776293516159,
+      49.12313260138035
+    ],
+    "average_runtime_ms": 48.989325389266014,
+    "median_ms": 48.958136700093746,
+    "stdev_ms": 0.15226400442291732,
+    "min_ms": 48.771316185593605,
+    "max_ms": 49.33405481278896,
+    "estimated_flops": 3710851743744,
+    "effective_tflops": 75.74816991778947
+  }
+}
