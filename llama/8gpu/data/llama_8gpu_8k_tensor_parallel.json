@@ -1,0 +1,132 @@
+{
+  "created_at_utc": "2026-05-18T18:27:19.600010+00:00",
+  "name": "llama_block_8gpu_tensor_parallel",
+  "framework": "jax",
+  "jax_version": "0.6.2",
+  "dtype": "float16",
+  "devices": [
+    {
+      "id": 0,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 1,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 2,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 3,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 4,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 5,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 6,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "id": 7,
+      "platform": "gpu",
+      "device_kind": "Tesla V100-SXM2-32GB"
+    }
+  ],
+  "topology": "two_4_gpu_numa_nvlink_islands_with_direct_cross_island_pairs",
+  "topology_notes": "GPUs 0-3 and 4-7 are separate CPU NUMA/NVLink islands. The 2x4 seq_model_parallel mesh keeps model shards within each island and places the seq axis across direct cross-island NVLink pairs.",
+  "mesh": {
+    "shape": [
+      8
+    ],
+    "axis_names": [
+      "model"
+    ],
+    "device_ids_row_major": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "sharding": {
+    "strategy": "8-way tensor parallelism with replicated sequence",
+    "x": "PartitionSpec(None, None, None)",
+    "q_weight": "PartitionSpec(None, 'model', None)",
+    "kv_weight": "PartitionSpec(None, 'model', None)",
+    "o_weight": "PartitionSpec('model', None, None)",
+    "gu_weight": "PartitionSpec(None, 'model')",
+    "down_weight": "PartitionSpec('model', None)",
+    "cos_sin": "PartitionSpec(None, None)",
+    "qkv_activations": "PartitionSpec(None, None, 'model', None)",
+    "attention_context": "PartitionSpec(None, None, 'model', None)",
+    "ffn_intermediate": "PartitionSpec(None, None, 'model')"
+  },
+  "attention_implementation": "auto",
+  "shape": {
+    "batch_sequences": 1,
+    "seq_len": 8192,
+    "total_tokens": 8192,
+    "packed_equal_length_sequences": false,
+    "hidden": 4096,
+    "q_heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_inter": 14336,
+    "ffn_gate_up": 28672
+  },
+  "rounds": {
+    "warmup": 3,
+    "timed": 10
+  },
+  "estimated_flop_counts": {
+    "projection": 687194767360,
+    "attention": 1099511627776,
+    "ffn": 2886218022912,
+    "total": 4672924418048
+  },
+  "timing": {
+    "compile_ms": 5450.580526143312,
+    "warmup_times_ms": [
+      23.11769127845764,
+      23.604411631822586,
+      22.973643615841866
+    ],
+    "times_ms": [
+      22.970955818891525,
+      22.987181320786476,
+      22.950930520892143,
+      22.98293262720108,
+      23.026229813694954,
+      22.992543876171112,
+      22.891907021403313,
+      22.934582084417343,
+      22.997548803687096,
+      22.952891886234283
+    ],
+    "average_runtime_ms": 22.968770377337933,
+    "median_ms": 22.976944223046303,
+    "stdev_ms": 0.037839535507924,
+    "min_ms": 22.891907021403313,
+    "max_ms": 23.026229813694954,
+    "estimated_flops": 4672924418048,
+    "effective_tflops": 203.4468689999412
+  }
+}
