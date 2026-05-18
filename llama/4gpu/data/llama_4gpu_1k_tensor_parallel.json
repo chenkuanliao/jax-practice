@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-18T17:36:58.028251+00:00",
+  "created_at_utc": "2026-05-18T21:21:18.734469+00:00",
   "name": "llama_block_4gpu_tensor_parallel",
   "framework": "jax",
   "jax_version": "0.6.2",
@@ -49,7 +49,7 @@
     "o_weight": "PartitionSpec('model', None, None)",
     "gu_weight": "PartitionSpec(None, 'model')",
     "down_weight": "PartitionSpec('model', None)",
-    "cos_sin": "PartitionSpec(None, None)",
+    "cos_sin": "PartitionSpec(None, None, None)",
     "qkv_activations": "PartitionSpec(None, None, 'model', None)",
     "attention_context": "PartitionSpec(None, None, 'model', None)",
     "ffn_intermediate": "PartitionSpec(None, None, 'model')"
@@ -78,30 +78,30 @@
     "total": 463856467968
   },
   "timing": {
-    "compile_ms": 2384.0177413076162,
+    "compile_ms": 2435.7900470495224,
     "warmup_times_ms": [
-      4.96191531419754,
-      5.054431036114693,
-      4.9092452973127365
+      4.829581826925278,
+      4.783181473612785,
+      4.703691229224205
     ],
     "times_ms": [
-      4.812430590391159,
-      4.971131682395935,
-      4.887385293841362,
-      4.84408438205719,
-      4.930503666400909,
-      4.723064601421356,
-      4.812639206647873,
-      4.864215850830078,
-      4.87653911113739,
-      4.941415041685104
+      4.750659689307213,
+      4.797019064426422,
+      4.789408296346664,
+      4.809729754924774,
+      4.732200875878334,
+      4.773775115609169,
+      4.781320691108704,
+      4.818929359316826,
+      4.776429384946823,
+      4.878057166934013
     ],
-    "average_runtime_ms": 4.866340942680836,
-    "median_ms": 4.870377480983734,
-    "stdev_ms": 0.07310504234773474,
-    "min_ms": 4.723064601421356,
-    "max_ms": 4.971131682395935,
+    "average_runtime_ms": 4.790752939879894,
+    "median_ms": 4.785364493727684,
+    "stdev_ms": 0.040049027684426024,
+    "min_ms": 4.732200875878334,
+    "max_ms": 4.878057166934013,
     "estimated_flops": 463856467968,
-    "effective_tflops": 95.31935255495364
+    "effective_tflops": 96.82329140931009
   }
 }
