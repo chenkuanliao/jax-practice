@@ -22,7 +22,7 @@ import numpy as np
 from jax.sharding import Mesh, NamedSharding, PartitionSpec as P
 
 
-EPS = 1e-6
+EPS = 1e-5
 
 
 def parse_args() -> argparse.Namespace:
@@ -89,11 +89,14 @@ def rmsnorm(x: Any, gamma: Any, eps: float) -> Any:
 
 
 def rope(x: Any, cos: Any, sin: Any) -> Any:
-    even = x[..., 0::2]
-    odd = x[..., 1::2]
-    rot_even = even * cos[None, :, None, :] - odd * sin[None, :, None, :]
-    rot_odd = even * sin[None, :, None, :] + odd * cos[None, :, None, :]
-    return jnp.stack((rot_even, rot_odd), axis=-1).reshape(x.shape)
+    half = x.shape[-1] // 2
+    first = x[..., :half]
+    second = x[..., half:]
+    cos_b = cos[:, :, None, :]
+    sin_b = sin[:, :, None, :]
+    rot_first = first * cos_b[..., :half] - second * sin_b[..., :half]
+    rot_second = first * sin_b[..., half:] + second * cos_b[..., half:]
+    return jnp.concatenate((rot_first, rot_second), axis=-1)
 
 
 def fused_silu_mul(gate_up: Any) -> Any:
@@ -101,12 +104,18 @@ def fused_silu_mul(gate_up: Any) -> Any:
     return jax.nn.silu(gate) * up
 
 
-def make_rope_tables(seq: int, head_dim: int, dtype: Any) -> tuple[Any, Any]:
-    pos = jnp.arange(seq, dtype=jnp.float32)[:, None]
+def make_rope_tables(batch_sequences: int, seq: int, head_dim: int, dtype: Any) -> tuple[Any, Any]:
+    total_tokens = batch_sequences * seq
+    pos = jnp.arange(total_tokens, dtype=jnp.float32)[:, None]
     idx = jnp.arange(0, head_dim, 2, dtype=jnp.float32)[None, :]
     inv_freq = 1.0 / (10000.0 ** (idx / head_dim))
     angles = pos * inv_freq
-    return jnp.cos(angles).astype(dtype), jnp.sin(angles).astype(dtype)
+    cos = jnp.concatenate((jnp.cos(angles), jnp.cos(angles)), axis=-1)
+    sin = jnp.concatenate((jnp.sin(angles), jnp.sin(angles)), axis=-1)
+    return (
+        cos.reshape((batch_sequences, seq, head_dim)).astype(dtype),
+        sin.reshape((batch_sequences, seq, head_dim)).astype(dtype),
+    )
 
 
 def make_array(shape: tuple[int, ...], sharding: Any, seed: int, dtype: Any) -> Any:
@@ -200,7 +209,7 @@ def main() -> None:
     if args.strategy == "tensor_parallel":
         mesh = Mesh(np.array(devices), axis_names=("model",))
         x_spec = P(None, None, None)
-        cos_sin_spec = P(None, None)
+        cos_sin_spec = P(None, None, None)
         q_spec = P(None, None, "model", None)
         kv_spec = P(None, None, "model", None)
         attn_ctx_spec = P(None, None, "model", None)
@@ -224,7 +233,7 @@ def main() -> None:
             attn_ctx_spec = P(None, "seq", "model", None)
             ffn_inter_spec = P(None, "seq", "model")
             seq_parallel_axis = "seq_len"
-        cos_sin_spec = P(None, None)
+        cos_sin_spec = P(None, None, None)
         mesh_shape = [2, 2]
         mesh_axis_names = ["seq", "model"]
         strategy_description = f"2D {seq_parallel_axis} and tensor parallelism"
@@ -312,7 +321,10 @@ def main() -> None:
             make_array((args.q_heads, args.head_dim, args.hidden), shardings["o_weight"], 6, dtype),
             make_array((args.hidden, args.ffn_gate_up), shardings["gu_weight"], 7, dtype),
             make_array((args.ffn_inter, args.hidden), shardings["down_weight"], 8, dtype),
-            *[jax.device_put(x, shardings["cos_sin"]) for x in make_rope_tables(args.seq_len, args.head_dim, dtype)],
+            *[
+                jax.device_put(x, shardings["cos_sin"])
+                for x in make_rope_tables(args.batch_sequences, args.seq_len, args.head_dim, dtype)
+            ],
         )
         counts = flop_counts(args)
         timing = benchmark(llama_block, fn_args, args.warmup, args.steps, counts["total"])
