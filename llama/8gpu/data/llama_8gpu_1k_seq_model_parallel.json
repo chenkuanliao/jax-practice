@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-18T18:22:34.607041+00:00",
+  "created_at_utc": "2026-05-18T21:25:11.264573+00:00",
   "name": "llama_block_8gpu_seq_model_parallel",
   "framework": "jax",
   "jax_version": "0.6.2",
@@ -76,7 +76,7 @@
     "o_weight": "PartitionSpec('model', None, None)",
     "gu_weight": "PartitionSpec(None, 'model')",
     "down_weight": "PartitionSpec('model', None)",
-    "cos_sin": "PartitionSpec(None, None)",
+    "cos_sin": "PartitionSpec(None, None, None)",
     "qkv_activations": "PartitionSpec(None, 'seq', 'model', None)",
     "attention_context": "PartitionSpec(None, 'seq', 'model', None)",
     "ffn_intermediate": "PartitionSpec(None, 'seq', 'model')"
@@ -105,30 +105,30 @@
     "total": 463856467968
   },
   "timing": {
-    "compile_ms": 3861.72710172832,
+    "compile_ms": 3778.50179746747,
     "warmup_times_ms": [
-      3.3348556607961655,
-      3.2743122428655624,
-      3.082139417529106
+      3.389233723282814,
+      3.2133813947439194,
+      3.15798819065094
     ],
     "times_ms": [
-      3.151793032884598,
-      3.9085038006305695,
-      4.074295982718468,
-      3.3653434365987778,
-      3.387017175555229,
-      3.2951757311820984,
-      3.285624086856842,
-      3.2943245023489,
-      3.1948350369930267,
-      3.272468224167824
+      3.125349059700966,
+      3.1980089843273163,
+      3.1356848776340485,
+      3.3312737941741943,
+      5.0385985523462296,
+      3.223950043320656,
+      3.4068580716848373,
+      3.1967442482709885,
+      3.21381539106369,
+      3.1545907258987427
     ],
-    "average_runtime_ms": 3.4229381009936333,
-    "median_ms": 3.294750116765499,
-    "stdev_ms": 0.3099391079932633,
-    "min_ms": 3.151793032884598,
-    "max_ms": 4.074295982718468,
+    "average_runtime_ms": 3.402487374842167,
+    "median_ms": 3.2059121876955032,
+    "stdev_ms": 0.5814738526210693,
+    "min_ms": 3.125349059700966,
+    "max_ms": 5.0385985523462296,
     "estimated_flops": 463856467968,
-    "effective_tflops": 135.5141268354659
+    "effective_tflops": 136.32863751317143
   }
 }
