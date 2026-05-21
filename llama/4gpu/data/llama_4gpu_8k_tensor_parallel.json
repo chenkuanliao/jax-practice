@@ -1,0 +1,107 @@
+{
+  "created_at_utc": "2026-05-21T20:56:08.613264+00:00",
+  "name": "llama_block_4gpu_tensor_parallel",
+  "framework": "jax",
+  "jax_version": "0.6.2",
+  "dtype": "float16",
+  "devices": [
+    {
+      "id": 0,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 1,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 2,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 3,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    }
+  ],
+  "topology": "first_4_gpus_single_numa_nvlink_island",
+  "mesh": {
+    "shape": [
+      4
+    ],
+    "axis_names": [
+      "model"
+    ],
+    "device_ids_row_major": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "sharding": {
+    "strategy": "4-way tensor parallelism with replicated sequence",
+    "x": "PartitionSpec(None, None, None)",
+    "q_weight": "PartitionSpec(None, 'model', None)",
+    "kv_weight": "PartitionSpec(None, 'model', None)",
+    "o_weight": "PartitionSpec('model', None, None)",
+    "gu_weight": "PartitionSpec(None, 'model')",
+    "down_weight": "PartitionSpec('model', None)",
+    "cos_sin": "PartitionSpec(None, None, None)",
+    "qkv_activations": "PartitionSpec(None, None, 'model', None)",
+    "attention_context": "PartitionSpec(None, None, 'model', None)",
+    "ffn_intermediate": "PartitionSpec(None, None, 'model')"
+  },
+  "attention_implementation": "auto",
+  "shape": {
+    "batch_sequences": 1,
+    "seq_len": 8192,
+    "total_tokens": 8192,
+    "packed_equal_length_sequences": false,
+    "hidden": 4096,
+    "q_heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_inter": 14336,
+    "ffn_gate_up": 28672
+  },
+  "rounds": {
+    "warmup": 3,
+    "timed": 10
+  },
+  "estimated_flop_counts": {
+    "projection": 687194767360,
+    "attention": 1099511627776,
+    "ffn": 2886218022912,
+    "total": 4672924418048
+  },
+  "timing": {
+    "compile_ms": 3784.74579300007,
+    "warmup_times_ms": [
+      14.470714999902157,
+      16.345009000019672,
+      14.320601999997962
+    ],
+    "times_ms": [
+      14.289993000033974,
+      14.355774000023303,
+      14.294625999923483,
+      14.310133999970276,
+      14.276064000000588,
+      14.324385999998412,
+      14.277096999990135,
+      14.244054000073447,
+      14.290668000057849,
+      14.300798000022041
+    ],
+    "average_runtime_ms": 14.29635940000935,
+    "median_ms": 14.292646999990666,
+    "stdev_ms": 0.03003655497390513,
+    "min_ms": 14.244054000073447,
+    "max_ms": 14.355774000023303,
+    "estimated_flops": 4672924418048,
+    "effective_tflops": 326.8611460652664
+  }
+}

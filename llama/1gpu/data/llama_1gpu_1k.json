@@ -1,0 +1,67 @@
+{
+  "created_at_utc": "2026-05-21T20:54:03.604960+00:00",
+  "name": "llama_block_1gpu",
+  "framework": "jax",
+  "jax_version": "0.6.2",
+  "dtype": "float16",
+  "devices": [
+    {
+      "id": 0,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    }
+  ],
+  "topology": "single_gpu",
+  "attention_implementation": "auto",
+  "shape": {
+    "batch_sequences": 1,
+    "seq_len": 1024,
+    "total_tokens": 1024,
+    "packed_equal_length_sequences": false,
+    "batch_chunk": 1,
+    "num_batch_chunks": 1,
+    "hidden": 4096,
+    "q_heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_inter": 14336,
+    "ffn_gate_up": 28672
+  },
+  "rounds": {
+    "warmup": 3,
+    "timed": 10
+  },
+  "estimated_flop_counts": {
+    "projection": 85899345920,
+    "attention": 17179869184,
+    "ffn": 360777252864,
+    "total": 463856467968
+  },
+  "timing": {
+    "compile_ms": 3178.336318999982,
+    "warmup_times_ms": [
+      2.647718999924109,
+      2.5347490000058315,
+      2.495995000003859
+    ],
+    "times_ms": [
+      2.481708000004801,
+      2.4780149999514833,
+      2.4761210000860956,
+      2.475084000025163,
+      2.484094000010373,
+      2.4736059999668214,
+      2.474886000072729,
+      2.480345999970268,
+      2.4773170000571554,
+      2.4759359999961816
+    ],
+    "average_runtime_ms": 2.477711300014107,
+    "median_ms": 2.4767190000716255,
+    "stdev_ms": 0.0033552790496392476,
+    "min_ms": 2.4736059999668214,
+    "max_ms": 2.484094000010373,
+    "estimated_flops": 463856467968,
+    "effective_tflops": 187.21166907757132
+  }
+}
