@@ -60,6 +60,12 @@ The `llama/` suite benchmarks one configurable Llama block with RMSNorm,
 Q/K/V projection, RoPE, causal GQA attention, output projection, residuals, and
 a gated FFN.
 
+The Llama benchmark scripts default to `--attention-implementation auto`.
+On A100 GPUs, `auto` resolves to JAX cuDNN SDPA for the fused flash-style
+attention path. On other GPUs, `auto` leaves JAX on its XLA implementation.
+Pass `--attention-implementation xla` or `--attention-implementation cudnn`
+to force either path.
+
 It currently includes:
 
 - `v1`: explicit constraints through major attention and FFN intermediates.

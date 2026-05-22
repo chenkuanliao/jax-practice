@@ -48,7 +48,7 @@ def parse_args() -> argparse.Namespace:
         "--attention-implementation",
         choices=["auto", "xla", "cudnn"],
         default="auto",
-        help="Use auto unless you want to force XLA or cuDNN SDPA.",
+        help="Auto uses cuDNN SDPA on A100 and XLA elsewhere unless forced.",
     )
     return parser.parse_args()
 
@@ -74,6 +74,14 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("--steps must be positive.")
     if args.warmup < 0:
         raise ValueError("--warmup cannot be negative.")
+
+
+def resolve_attention_implementation(args: argparse.Namespace, device: Any) -> str | None:
+    if args.attention_implementation != "auto":
+        return args.attention_implementation
+    if "A100" in getattr(device, "device_kind", ""):
+        return "cudnn"
+    return None
 
 
 def rmsnorm(x: Any, gamma: Any, eps: float) -> Any:
@@ -196,9 +204,7 @@ def main() -> None:
     if not devices:
         raise RuntimeError("No GPU is visible to JAX. This script expects CUDA_VISIBLE_DEVICES=0.")
     device = devices[0]
-    attention_implementation = (
-        None if args.attention_implementation == "auto" else args.attention_implementation
-    )
+    attention_implementation = resolve_attention_implementation(args, device)
     batch_chunk = args.batch_chunk
     if batch_chunk == 0:
         batch_chunk = 1 if args.batch_sequences >= 32 else args.batch_sequences
@@ -273,7 +279,8 @@ def main() -> None:
             }
         ],
         "topology": "single_gpu",
-        "attention_implementation": args.attention_implementation,
+        "attention_implementation": attention_implementation or "xla",
+        "attention_implementation_requested": args.attention_implementation,
         "shape": {
             "batch_sequences": args.batch_sequences,
             "seq_len": args.seq_len,

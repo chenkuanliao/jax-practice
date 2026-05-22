@@ -48,7 +48,7 @@ def parse_args() -> argparse.Namespace:
         "--attention-implementation",
         choices=["auto", "xla", "cudnn"],
         default="auto",
-        help="Use auto unless you want to force XLA or cuDNN SDPA.",
+        help="Auto uses cuDNN SDPA on A100 and XLA elsewhere unless forced.",
     )
     return parser.parse_args()
 
@@ -81,6 +81,14 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("--steps must be positive.")
     if args.warmup < 0:
         raise ValueError("--warmup cannot be negative.")
+
+
+def resolve_attention_implementation(args: argparse.Namespace, devices: list[Any]) -> str | None:
+    if args.attention_implementation != "auto":
+        return args.attention_implementation
+    if any("A100" in getattr(device, "device_kind", "") for device in devices):
+        return "cudnn"
+    return None
 
 
 def rmsnorm(x: Any, gamma: Any, eps: float) -> Any:
@@ -237,9 +245,7 @@ def main() -> None:
         mesh_shape = [2, 2]
         mesh_axis_names = ["seq", "model"]
         strategy_description = f"2D {seq_parallel_axis} and tensor parallelism"
-    attention_implementation = (
-        None if args.attention_implementation == "auto" else args.attention_implementation
-    )
+    attention_implementation = resolve_attention_implementation(args, devices)
 
     shardings = {
         "x": NamedSharding(mesh, x_spec),
@@ -362,7 +368,8 @@ def main() -> None:
             "attention_context": str(attn_ctx_spec),
             "ffn_intermediate": str(ffn_inter_spec),
         },
-        "attention_implementation": args.attention_implementation,
+        "attention_implementation": attention_implementation or "xla",
+        "attention_implementation_requested": args.attention_implementation,
         "shape": {
             "batch_sequences": args.batch_sequences,
             "seq_len": args.seq_len,
