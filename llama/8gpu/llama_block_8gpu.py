@@ -83,7 +83,22 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("--warmup cannot be negative.")
 
 
+def shards_sequence_length(args: argparse.Namespace) -> bool:
+    return (
+        args.strategy == "seq_model_parallel"
+        and not (args.batch_sequences > 1 and args.batch_sequences % 2 == 0)
+    )
+
+
 def resolve_attention_implementation(args: argparse.Namespace, devices: list[Any]) -> str | None:
+    if shards_sequence_length(args):
+        if args.attention_implementation == "cudnn":
+            raise ValueError(
+                "cuDNN dot_product_attention does not support sharding the sequence-length "
+                "dimension. Use --attention-implementation xla for this benchmark."
+            )
+        if args.attention_implementation == "auto":
+            return None
     if args.attention_implementation != "auto":
         return args.attention_implementation
     if any("A100" in getattr(device, "device_kind", "") for device in devices):
