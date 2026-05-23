@@ -1,0 +1,133 @@
+{
+  "created_at_utc": "2026-05-23T00:59:55.528030+00:00",
+  "name": "llama_block_8gpu_tensor_parallel",
+  "framework": "jax",
+  "jax_version": "0.6.2",
+  "dtype": "float16",
+  "devices": [
+    {
+      "id": 0,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 1,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 2,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 3,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 4,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 5,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 6,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    },
+    {
+      "id": 7,
+      "platform": "gpu",
+      "device_kind": "NVIDIA A100-SXM4-40GB"
+    }
+  ],
+  "topology": "two_4_gpu_numa_nvlink_islands_with_direct_cross_island_pairs",
+  "topology_notes": "GPUs 0-3 and 4-7 are separate CPU NUMA/NVLink islands. The 2x4 seq_model_parallel mesh keeps model shards within each island and places the seq axis across direct cross-island NVLink pairs.",
+  "mesh": {
+    "shape": [
+      8
+    ],
+    "axis_names": [
+      "model"
+    ],
+    "device_ids_row_major": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "sharding": {
+    "strategy": "8-way tensor parallelism with replicated sequence",
+    "x": "PartitionSpec(None, None, None)",
+    "q_weight": "PartitionSpec(None, 'model', None)",
+    "kv_weight": "PartitionSpec(None, 'model', None)",
+    "o_weight": "PartitionSpec('model', None, None)",
+    "gu_weight": "PartitionSpec(None, 'model')",
+    "down_weight": "PartitionSpec('model', None)",
+    "cos_sin": "PartitionSpec(None, None, None)",
+    "qkv_activations": "PartitionSpec(None, None, 'model', None)",
+    "attention_context": "PartitionSpec(None, None, 'model', None)",
+    "ffn_intermediate": "PartitionSpec(None, None, 'model')"
+  },
+  "attention_implementation": "cudnn",
+  "attention_implementation_requested": "auto",
+  "shape": {
+    "batch_sequences": 8,
+    "seq_len": 1024,
+    "total_tokens": 8192,
+    "packed_equal_length_sequences": true,
+    "hidden": 4096,
+    "q_heads": 32,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_inter": 14336,
+    "ffn_gate_up": 28672
+  },
+  "rounds": {
+    "warmup": 3,
+    "timed": 10
+  },
+  "estimated_flop_counts": {
+    "projection": 687194767360,
+    "attention": 137438953472,
+    "ffn": 2886218022912,
+    "total": 3710851743744
+  },
+  "timing": {
+    "compile_ms": 3763.8614750001125,
+    "warmup_times_ms": [
+      6.970727999942028,
+      7.383449999906588,
+      6.257798999968145
+    ],
+    "times_ms": [
+      6.234799000139901,
+      6.230480000112948,
+      6.257454000206053,
+      6.2361190000501665,
+      6.225371000027735,
+      6.274765999933152,
+      6.242512999961036,
+      6.239589000188062,
+      6.252786000004562,
+      6.244084999934785
+    ],
+    "average_runtime_ms": 6.24379620005584,
+    "median_ms": 6.241051000074549,
+    "stdev_ms": 0.014539636379115145,
+    "min_ms": 6.225371000027735,
+    "max_ms": 6.274765999933152,
+    "estimated_flops": 3710851743744,
+    "effective_tflops": 594.3262119463176
+  }
+}
